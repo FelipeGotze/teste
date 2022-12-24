@@ -10,7 +10,7 @@ Executar o comando npm install.
 Foi criado os controllers para as classes de usuários, token e carros;
 As rotas acessam os controllers e executam as funções designadas;
 
-# Dashnboard
+# Dashboard
 
 Login utilizando email e senha, inicialmente seguir para o link "Cadastro de Usuário" em seguida efetuar o login normalmente;
 É gerado um token que fica armazenado em um cookie, a cada acesso é verificado se o mesmo existe, caso não exista é redirecionado à página de login.
