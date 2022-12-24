@@ -12,7 +12,7 @@ As rotas acessam os controllers e executam as funções designadas;
 
 # Dashboard
 
-Login utilizando email e senha, inicialmente seguir para o link "Cadastro de Usuário" em seguida efetuar o login normalmente;
+Login utilizando email e senha, inicialmente seguir para o link "Cadastro de Usuário" e efetuar o cadastro, em seguida efetuar o login normalmente;
 É gerado um token que fica armazenado em um cookie, a cada acesso é verificado se o mesmo existe, caso não exista é redirecionado à página de login.
 
 A Dashboard tem as principais ações, na página inicial  mostra os cards dos veículos cadastrados;
