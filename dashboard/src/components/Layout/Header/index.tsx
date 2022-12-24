@@ -1,4 +1,4 @@
-import { Flex, HStack, Image } from "@chakra-ui/react"
+import { Flex, HStack, Image, Text } from "@chakra-ui/react"
 import Container from "../Container";
 import CustomLink from "./Link";
 import Profile from "./Profile";
@@ -16,7 +16,7 @@ const Header = () => {
         alignItems="center"
         justifyContent="space-between"
       >
-        <Image src='{logo}' h="40px" />
+        <Text fontSize="5xl">Car Dealer</Text>
         <HStack gap={4}>
           <CustomLink text="Dashboard" to="/" />
           <CustomLink text="Cadastro" to="/cadastro" />

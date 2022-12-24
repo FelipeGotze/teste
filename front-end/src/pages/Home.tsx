@@ -4,9 +4,9 @@ import CarList from "../components/Layout/CarList";
 
 const Home = () => {
     return (
-        <Flex marginTop="150px;" padding="30px">
-            <CarList />
-        </Flex>
+
+        <CarList />
+
     )
 }
 

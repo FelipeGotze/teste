@@ -89,10 +89,16 @@ class AuthController extends Controller
     {
         $token = $request->header('Authorization');
         $user = json_decode(base64_decode(str_replace('_', '/', str_replace('-', '+', explode('.', $token)[1]))));
-        $user = (array) $user;
 
-        $request = DB::select('SELECT id, name, email FROM users WHERE email=:email', ['email' => $user['email']]);
+        $user = (array)$user;
 
-        return $request;
+        $fetch = DB::select('SELECT id, name, email FROM users WHERE email=:email', ['email' => $user['email']]);
+
+
+        $token = explode(" ", $token);
+
+        $return = ['id' => $fetch[0]->id, 'name' => $fetch[0]->name, 'email' => $fetch[0]->email, 'token' => $token[1]];
+
+        return $return;
     }
 }

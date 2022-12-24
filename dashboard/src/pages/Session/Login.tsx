@@ -69,7 +69,7 @@ function Login() {
           </Flex>
           <Input
             variant="filled"
-            placeholder='Usuário'
+            placeholder='E-Mail'
             type="email"
             value={email}
             onChange={e => setEmail(e.target.value)}
@@ -102,15 +102,6 @@ function Login() {
             px="1"
           >
             Cadastro de Usuário
-          </ChakraLink>
-          <ChakraLink
-            as={Link}
-            to="/recuperar-senha"
-            textDecoration="none"
-            _hover={{ bgColor: "purple.500", color: "white !important" }}
-            px="1"
-          >
-            Recuperar Senha
           </ChakraLink>
         </Flex>
       </Flex>

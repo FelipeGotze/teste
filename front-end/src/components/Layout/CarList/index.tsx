@@ -34,7 +34,7 @@ const CarList = () => {
     }
 
     return (
-        <Flex direction="column">
+        <Flex direction="column" gap={4} marginTop="150px;" padding="30px">
             <Box w='100%'>
                 <InputGroup w="800px" margin="auto">
                     <InputRightElement
@@ -42,13 +42,13 @@ const CarList = () => {
                         children={<Search2Icon color='gray.300' />}
                     />
                     <Input
-                        type='tel'
+                        type='text'
                         placeholder='Busque por marca ou modelo'
                         onChange={e => filterCars(e)}
                     />
                 </InputGroup>
             </Box>
-            <SimpleGrid columns={4} spacing={4}>
+            <SimpleGrid w="100%" columns={4} spacing={4}>
                 {carList.map(car => (
                     <Car key={car.id} image={car.image} name={car.name} brand={car.brand} model={car.model} price={car.price} />
                 ))}

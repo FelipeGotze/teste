@@ -1,13 +1,9 @@
 import { Button, Flex, Input, SimpleGrid, useColorModeValue, useToast } from "@chakra-ui/react";
 import { FormEvent, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Title from "../components/Common/Title";
-import CarTable from "../components/Layout/CarTable";
 import { api } from "../services/api";
 
-
-
-function Cadastro() {
+function UpdateCar() {
     const toast = useToast();
     const navigate = useNavigate();
 
@@ -18,20 +14,18 @@ function Cadastro() {
     const [brand, setBrand] = useState<string>("");
     const [price, setPrice] = useState<string>("");
 
-
-
-    const handleCadastro = async (e: FormEvent) => {
+    const handleUpdate = async (e: FormEvent) => {
         e.preventDefault();
         setIsLoading(true);
 
-        api.post("/create-car", {
+        api.post("/update-car", {
             name,
             model,
             brand,
             price,
         }).then(() => {
             toast({
-                title: 'Cadastro realizado com sucedido!',
+                title: 'Update realizado com sucedido!',
                 description: "",
                 status: 'success',
                 duration: 9000,
@@ -42,7 +36,7 @@ function Cadastro() {
         })
             .catch(e => {
                 toast({
-                    title: 'Cadastro mal sucedido!',
+                    title: 'Update mal sucedido!',
                     description: "Confira suas informações e tente novamente.",
                     status: 'error',
                     duration: 9000,
@@ -63,11 +57,10 @@ function Cadastro() {
                 justify={'center'}
                 flexDirection="column"
                 bg={useColorModeValue('gray.50', 'gray.800')}
-                onSubmit={handleCadastro}
+                onSubmit={handleUpdate}
                 gap="4"
-                mb="32px"
             >
-                <Title title="Cadastre um novo veículo" />
+                <h1>Cadastre novo veículo</h1>
                 <SimpleGrid columns={[1, 1, 2, 2, 2]} gap="4">
                     <Input
                         required
@@ -114,14 +107,11 @@ function Cadastro() {
                     }}
                     isLoading={isLoading}
                 >
-                    Cadastrar
+                    Alterar
                 </Button>
             </Flex>
-
-            <CarTable />
-
         </>
     )
 }
 
-export default Cadastro;
+export default UpdateCar;

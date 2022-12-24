@@ -34,8 +34,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
   const isAuthenticated = !!user;
   const isLoginPage = useMatch('/login');
   const isRegisterPage = useMatch('/registro');
-  const isPasswordRecoverPage = useMatch('/recuperar-senha');
-  const shouldRedirect = isLoginPage || isRegisterPage || isPasswordRecoverPage;
+  const shouldRedirect = isLoginPage || isRegisterPage;
 
   useEffect(() => {
 
@@ -45,9 +44,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
 
       api.get('/me')
         .then(response => {
-          const { id, name, email, token } = response.data.data;
-
-          alert(response.data.data);
+          const { id, name, email, token } = response.data;
 
           setUser({ id, name, email, token });
 

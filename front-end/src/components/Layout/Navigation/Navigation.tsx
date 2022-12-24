@@ -1,5 +1,5 @@
 import { CloseIcon, HamburgerIcon, Search2Icon } from "@chakra-ui/icons";
-import { Image, Link as ChakraLink, useColorModeValue, useDisclosure, Flex, IconButton, HStack, Menu, MenuButton, Button, Avatar, MenuList, MenuItem, MenuDivider, Stack, Box, Input, InputGroup, InputLeftElement, InputRightElement } from "@chakra-ui/react";
+import { Link as ChakraLink, useColorModeValue, useDisclosure, Flex, IconButton, HStack, Menu, MenuButton, Button, Avatar, MenuList, MenuItem, MenuDivider, Stack, Box, Text } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import Container from "../Container";
 
@@ -7,13 +7,24 @@ import Container from "../Container";
 
 const Links = [
   {
-    titulo: 'Home',
+    titulo: 'Comprar Carro',
     href: '/',
     ext: false
   },
   {
-    titulo: 'Dashboard',
-    href: '/login',
+    titulo: 'Vender Carro',
+    href: '/',
+    ext: false
+  },
+  {
+    titulo: 'App Car Dealer',
+    href: '/',
+    ext: false
+  },
+
+  {
+    titulo: 'Sobre nós',
+    href: '/',
     ext: false
   },
 ]
@@ -77,7 +88,7 @@ export default function Simple() {
             />
             <HStack spacing={8} alignItems={'center'}>
               <Box>
-                <Image src='{logo}' width="120px"></Image>
+                <Text fontSize="5xl">Car Dealer</Text>
               </Box>
             </HStack>
 
@@ -106,7 +117,7 @@ export default function Simple() {
                   />
                 </MenuButton>
                 <MenuList>
-                  <MenuItem>Acessar Dashboard</MenuItem>
+                  <MenuItem>Acessar Perfil</MenuItem>
                   <MenuDivider />
                   <MenuItem>Cadastre-se</MenuItem>
                 </MenuList>
@@ -124,15 +135,7 @@ export default function Simple() {
               </Stack>
             </Box>
           ) : null}
-          <Box w='100%'>
-            <InputGroup w="800px" margin="auto">
-              <InputRightElement
-                pointerEvents='none'
-                children={<Search2Icon color='gray.300' />}
-              />
-              <Input type='tel' placeholder='Busque por marca ou modelo' />
-            </InputGroup>
-          </Box>
+
         </Container>
       </Box>
     </>

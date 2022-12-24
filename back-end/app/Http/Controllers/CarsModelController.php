@@ -40,8 +40,15 @@ class CarsModelController extends Controller
     //CarsModelController
     public function updateCar(Request $data)
     {
-        $values = ['id' => $data->id, 'name' => $data->name, 'model' => $data->model, 'brand' => $data->brand, 'image' => $data->brand, 'price' => $data->price];
-        $insert = DB::update('UPDATE cars_models SET name=:name, model=:model, brand=:brand, image=:image, price=:price WHERE id=:id', $values);
+        $values = [
+            'id' => $data->id,
+            'name' => $data->nameForm,
+            'model' => $data->modelForm,
+            'brand' => $data->brandForm,
+            'price' => (int)$data->priceForm
+        ];
+
+        $insert = DB::update('UPDATE cars_models SET name=:name, model=:model, brand=:brand, price=:price WHERE id=:id', $values);
 
         if ($insert) {
             return $this->success([]);

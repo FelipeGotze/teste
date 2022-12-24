@@ -1,5 +1,5 @@
 import { CloseIcon, HamburgerIcon, Search2Icon } from "@chakra-ui/icons";
-import { Image, Link as ChakraLink, useColorModeValue, useDisclosure, Flex, IconButton, HStack, Menu, MenuButton, Button, Avatar, MenuList, MenuItem, MenuDivider, Stack, Box, Input, InputGroup, InputLeftElement, InputRightElement } from "@chakra-ui/react";
+import { Image, Link as ChakraLink, useColorModeValue, useDisclosure, Flex, IconButton, HStack, Menu, MenuButton, Button, Avatar, MenuList, MenuItem, MenuDivider, Stack, Box, Input, InputGroup, InputLeftElement, InputRightElement, Text } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import Container from "../Container";
 
@@ -77,7 +77,7 @@ export default function Simple() {
             />
             <HStack spacing={8} alignItems={'center'}>
               <Box>
-                <Image src='{logo}' width="120px"></Image>
+                <Text fontSize="5xl">Car Dealer</Text>
               </Box>
             </HStack>
 
@@ -91,27 +91,6 @@ export default function Simple() {
                 <NavLink key={link.titulo} titulo={link.titulo} path={link.href} ext={link.ext} />
               ))}
             </HStack>
-
-            <Flex alignItems='center'>
-              <Menu>
-                <MenuButton
-                  as={Button}
-                  rounded={'full'}
-                  variant={'link'}
-                  cursor={'pointer'}
-                  minW={0}>
-                  <Avatar
-                    size={'sm'}
-                    src='https://bit.ly/broken-link'
-                  />
-                </MenuButton>
-                <MenuList>
-                  <MenuItem>Acessar Dashboard</MenuItem>
-                  <MenuDivider />
-                  <MenuItem>Cadastre-se</MenuItem>
-                </MenuList>
-              </Menu>
-            </Flex>
 
           </Flex>
 
