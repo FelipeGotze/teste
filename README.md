@@ -5,6 +5,8 @@ Após clonar o repósitório e executar os comandos de instalação, executar o 
 O Front-end e o Dashboard foram desenvolvidos com React com Typescript e Vite utilizando npm.
 Executar o comando npm install.
 
+Tesar utiliando os comandos php artisan serve para o laravel e npm run dev para o React
+
 # Back-end
 
 Foi criado os controllers para as classes de usuários, token e carros;
