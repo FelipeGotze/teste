@@ -9,6 +9,7 @@ import {
   Button,
   useColorModeValue,
   useToast,
+  Text,
 } from '@chakra-ui/react';
 
 import { Link } from 'react-router-dom';
@@ -65,7 +66,7 @@ function Login() {
           position="relative"
         >
           <Flex justifyContent="center" p="2">
-            <Image src='{logo}' h="40px" />
+            <Text fontSize="5xl">Car Dealer</Text>
           </Flex>
           <Input
             variant="filled"
