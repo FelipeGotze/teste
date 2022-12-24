@@ -14,7 +14,6 @@ import {
   Checkbox,
   useDisclosure,
 } from '@chakra-ui/react';
-import Terms from '../../components/Common/Terms';
 import { api } from '../../services/api';
 import { Link, useNavigate } from 'react-router-dom';
 
@@ -30,8 +29,6 @@ function Register() {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [passwordConfirmation, setPasswordConfirmation] = useState<string>("");
-  const [apiKey, setApiKey] = useState<string>("");
-  const [apíSecret, setApíSecret] = useState<string>("");
 
   const handleLogin = async (e: FormEvent) => {
     e.preventDefault();
@@ -68,8 +65,6 @@ function Register() {
       email,
       password,
       password_confirmation: passwordConfirmation,
-      api_key: apiKey,
-      api_secret: apíSecret
     })
       .then(() => {
         toast({
@@ -85,7 +80,7 @@ function Register() {
       .catch(e => {
         toast({
           title: 'Cadastro mal sucedido!',
-          description: "Confira ssuas informações e tente novamente.",
+          description: "Confira suas informações e tente novamente.",
           status: 'error',
           duration: 9000,
           isClosable: true,
@@ -109,7 +104,6 @@ function Register() {
         onSubmit={handleLogin}
         px="4"
       >
-        <Terms modal={termsDisclosure} />
         <Box
           as={Stack}
           minW="300px"
@@ -163,38 +157,19 @@ function Register() {
             />
           </SimpleGrid>
 
-          <SimpleGrid columns={[1, 1, 2, 2, 2]} gap="4">
-            <Input
-              required
-              variant="filled"
-              placeholder='Binance API Key'
-              type="text"
-              value={apiKey}
-              onChange={e => setApiKey(e.target.value)}
-            />
-            <Input
-              required
-              variant="filled"
-              placeholder='Binance API Secret'
-              type="text"
-              value={apíSecret}
-              onChange={e => setApíSecret(e.target.value)}
-            />
-          </SimpleGrid>
-
           <Flex gap="3">
-            <Checkbox colorScheme="purple" isChecked={agreed} onChange={() => setAgreed(!agreed)} />
+            <Checkbox colorScheme="blue" isChecked={agreed} onChange={() => setAgreed(!agreed)} />
             <Text as="span">
-              Confirmo que li e concordo com os <ChakraLink onClick={termsDisclosure.onOpen} textDecoration="none" _hover={{ bgColor: "purple.500", color: "white !important" }} borderBottom="1px solid" borderColor="purple.500" px="1">termos de serviço</ChakraLink>.
+              Confirmo que li e concordo com os <ChakraLink onClick={termsDisclosure.onOpen} textDecoration="none" _hover={{ bgColor: "blue.500", color: "white !important" }} borderBottom="1px solid" borderColor="blue.500" px="1">termos de serviço</ChakraLink>.
             </Text>
           </Flex>
 
           <Button
             type="submit"
-            bg={'purple.600'}
+            bg={'blue.600'}
             color="white"
             _hover={{
-              bg: 'purple.700',
+              bg: 'blue.700',
             }}
             isLoading={isLoading}
           >
@@ -206,7 +181,7 @@ function Register() {
             as={Link}
             to="/login"
             textDecoration="none"
-            _hover={{ bgColor: "purple.500", color: "white !important" }}
+            _hover={{ bgColor: "blue.500", color: "white !important" }}
             px="1"
           >
             Acessar conta existente

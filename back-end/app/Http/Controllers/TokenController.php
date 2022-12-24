@@ -14,7 +14,7 @@ use Jose\Component\Signature\Serializer\JWSSerializerManager;
 
 class TokenController extends Controller
 {
-    static function createToken(Request $data)
+    static function createToken($uuid, $email)
     {
 
         $algorithmManager = new AlgorithmManager([
@@ -34,8 +34,8 @@ class TokenController extends Controller
             'iat' => time(),
             'nbf' => time(),
             'exp' => time() + 3600,
-            'sub' => $data->id,
-            'email' => $data->email,
+            'sub' => $uuid,
+            'email' => $email,
         ]);
 
         $jws = $jwsBuilder
@@ -51,9 +51,8 @@ class TokenController extends Controller
         return $token;
     }
 
-    static function validateToken(Request $data)
+    static function validateToken($data)
     {
-
         $algorithmManager = new AlgorithmManager([
             new HS256(),
         ]);
@@ -71,7 +70,7 @@ class TokenController extends Controller
             new CompactSerializer(),
         ]);
 
-        $jws = $serializerManager->unserialize($data->token);
+        $jws = $serializerManager->unserialize($data);
 
         $isVerified = $jwsVerifier->verifyWithKey($jws, $jwk, 0);
 

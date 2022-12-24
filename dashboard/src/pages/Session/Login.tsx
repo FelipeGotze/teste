@@ -34,7 +34,7 @@ function Login() {
         title: 'Login mal sucedido!',
         description: "Confira seu e-mail e senha e tente novamente.",
         status: 'error',
-        duration: 9000,
+        duration: 5000,
         isClosable: true,
         position: 'top'
       });

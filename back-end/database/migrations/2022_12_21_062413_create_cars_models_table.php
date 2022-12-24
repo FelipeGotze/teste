@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('model');
             $table->string('brand');
-            $table->number('value');
+            $table->integer('price');
             $table->string('image');
         });
     }

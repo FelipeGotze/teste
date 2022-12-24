@@ -4,32 +4,52 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\TokenController as Token;
-use App\Traits\HttpResponses;
+
 use Illuminate\Support\Facades\DB;
 
 
 class AuthController extends Controller
 {
-    use HttpResponses;
+    protected function success($data, $message = null, $code = 200)
+    {
+        return response()->json([
+            'status' => 'Request was sucessful',
+            'message' => $message,
+            'data' => $data
+        ], $code);
+    }
+    protected function error($data, $message = null, $code)
+    {
+        return response()->json([
+            'status' => 'Error has ocurred...',
+            'message' => $message,
+            'data' => $data
+        ], $code);
+    }
 
     //login testa o e-mail primeiro, encontrando testa a senha e emite a resposta para o front-end contendo usuário, e-mail e token
     public function login(Request $data)
     {
 
         $request = DB::select('SELECT email FROM users WHERE email=:email', ['email' => $data->email]);
+
         if ($request) {
-            $users = DB::select('SELECT uuid,name,email FROM users WHERE pass=:pass', ['pass' => md5($data->pass)]);
+
+            $users = DB::select('SELECT * FROM users WHERE password=:password AND email=:email', ['password' => md5($data->password), 'email' => $data->email]);
+            $users = (array) $users[0];
+
             if ($users) {
 
                 $token = Token::createToken($users['uuid'], $users['email']);
 
-                $values = ['token' => $token];
+                $values = ['uuid' => $users['uuid'], 'name' => $users['name'], 'token' => $token];
 
-                DB::insert('INSERT INTO loggedUsers (uuid, name, token) VALUES (uuid(), :name, :token)', $values);
+                DB::insert('INSERT INTO loggedusers (uuid, name, token) VALUES (:uuid, :name, :token)', $values);
 
                 return $this->success([
-                    'user' => $data->user,
-                    'email' => $data->email,
+                    'id' => $users['uuid'],
+                    'name' => $users['name'],
+                    'email' => $users['email'],
                     'token' => $token
                 ]);
             } else {
@@ -63,5 +83,16 @@ class AuthController extends Controller
         if ($deleted) {
             return $this->success([]);
         }
+    }
+
+    public function get_me(Request $request)
+    {
+        $token = $request->header('Authorization');
+        $user = json_decode(base64_decode(str_replace('_', '/', str_replace('-', '+', explode('.', $token)[1]))));
+        $user = (array) $user;
+
+        $request = DB::select('SELECT id, name, email FROM users WHERE email=:email', ['email' => $user['email']]);
+
+        return $request;
     }
 }

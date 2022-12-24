@@ -13,6 +13,7 @@ class CarsModel extends Model
         'name',
         'model',
         'brand',
+        'price',
         'image'
     ];
 }

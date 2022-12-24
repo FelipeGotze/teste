@@ -19,8 +19,12 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->rememberToken();
-            $table->timestamps();
+        });
+        Schema::create('loggedUsers', function (Blueprint $table) {
+            $table->id();
+            $table->string('uuid');
+            $table->string('name');
+            $table->mediumText('token');
         });
     }
 
@@ -32,5 +36,6 @@ return new class extends Migration
     public function down()
     {
         Schema::dropIfExists('users');
+        Schema::dropIfExists('loggedUsers');
     }
 };

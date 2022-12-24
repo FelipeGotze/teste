@@ -5,7 +5,7 @@ interface CarProps {
     image: string,
     model: string,
     brand: string,
-    price: string
+    price: number
 }
 const Car = ({
     image,
@@ -22,10 +22,11 @@ const Car = ({
                     alt={name}
                     borderRadius='lg'
                 />
-                <Stack mt='6' spacing='3'>
-                    <Heading size='md' margin="auto">{name} - {model}</Heading>
-                    <Text color='blue.600' fontSize='2xl' align="center">
-                        R${price}
+                <Stack mt='6'>
+                    <Heading size='md' margin="auto">{name}</Heading>
+                    <Text fontSize='xs' color='gray.400' align='center'>{model}</Text>
+                    <Text color='blue.600' fontSize='2xl' align="center" marginTop='16px'>
+                        {price.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}
                     </Text>
                 </Stack>
             </CardBody>

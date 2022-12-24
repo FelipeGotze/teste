@@ -2,28 +2,42 @@
 
 namespace App\Http\Controllers;
 
-use App\Traits\HttpResponses;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
 {
-    use HttpResponses;
+    protected function success($data, $message = null, $code = 200)
+    {
+        return response()->json([
+            'status' => 'Request was sucessful',
+            'message' => $message,
+            'data' => $data
+        ], $code);
+    }
+    protected function error($data, $message = null, $code)
+    {
+        return response()->json([
+            'status' => 'Error has ocurred...',
+            'message' => $message,
+            'data' => $data
+        ], $code);
+    }
 
     public function newUser(Request $data)
     {
 
-        $values = ['user' => $data->user, 'pass' => $data->pass, 'email' => $data->email];
-        $results = DB::insert('INSERT INTO users (uuid, name, pass, email) VALUES (uuid(), :name, :pass, :email)', $values);
+        $values = ['name' => $data->name, 'password' => md5($data->password), 'email' => $data->email];
+        $results = DB::insert('INSERT INTO users (uuid, name, password, email) VALUES (uuid(), :name, :password, :email)', $values);
 
         if ($results) {
             return $this->success([
-                'user' => $data->user,
+                'user' => $data->name,
                 'email' => $data->email
             ]);
         } else {
             return $this->error([
-                'user' => $data->user,
+                'name' => $data->user,
                 'email' => $data->email
             ], 'Houve um erro no cadastro, tente novamente', 400);
         }

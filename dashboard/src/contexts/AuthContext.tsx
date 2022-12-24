@@ -38,14 +38,16 @@ export function AuthProvider({ children }: AuthProviderProps) {
   const shouldRedirect = isLoginPage || isRegisterPage || isPasswordRecoverPage;
 
   useEffect(() => {
-    navigate("/");
+
     const { "auth.token": token } = parseCookies();
 
     if (token) {
-      navigate("/");
+
       api.get('/me')
         .then(response => {
-          const { id, name, email, token } = response.data;
+          const { id, name, email, token } = response.data.data;
+
+          alert(response.data.data);
 
           setUser({ id, name, email, token });
 
@@ -75,9 +77,9 @@ export function AuthProvider({ children }: AuthProviderProps) {
     });
 
     setUser({
-      id: response.data.data.user.id,
-      name: response.data.data.user.name,
-      email: response.data.data.user.email,
+      id: response.data.data.id,
+      name: response.data.data.name,
+      email: response.data.data.email,
       token: response.data.data.token,
     });
 

@@ -1,88 +1,37 @@
-import { SimpleGrid } from "@chakra-ui/react";
+import { Flex, SimpleGrid } from "@chakra-ui/react";
+import { useEffect, useState } from "react";
 import Car from "../../Common/Car";
+import Title from "../../Common/Title";
+import { api } from "../../../services/api";
 
-const Cars = [
-    {
-        id: 1,
-        image: "",
-        name: "car 1",
-        model: "hatch",
-        brand: "Nissan",
-        price: "75.000,00"
-    },
-    {
-        id: 2,
-        image: "",
-        name: "car 1",
-        model: "hatch",
-        brand: "Nissan",
-        price: "75.000,00"
-    },
-    {
-        id: 3,
-        image: "",
-        name: "car 1",
-        model: "hatch",
-        brand: "Nissan",
-        price: "75.000,00"
-    },
-    {
-        id: 4,
-        image: "",
-        name: "car 1",
-        model: "hatch",
-        brand: "Nissan",
-        price: "75.000,00"
-    },
-    {
-        id: 5,
-        image: "",
-        name: "car 1",
-        model: "hatch",
-        brand: "Nissan",
-        price: "75.000,00"
-    },
-    {
-        id: 6,
-        image: "",
-        name: "car 1",
-        model: "hatch",
-        brand: "Nissan",
-        price: "75.000,00"
-    },
-    {
-        id: 7,
-        image: "",
-        name: "car 1",
-        model: "hatch",
-        brand: "Nissan",
-        price: "75.000,00"
-    },
-    {
-        id: 8,
-        image: "",
-        name: "car 1",
-        model: "hatch",
-        brand: "Nissan",
-        price: "75.000,00"
-    },
-    {
-        id: 9,
-        image: "",
-        name: "car 1",
-        model: "hatch",
-        brand: "Nissan",
-        price: "75.000,00"
-    },
-];
+interface CarProps {
+    id: number,
+    name: string,
+    model: string,
+    brand: string,
+    price: number,
+    image: string,
+}
 
 const CarList = () => {
+    const [carList, setCars] = useState<CarProps[]>([]);
+
+    useEffect(() => {
+        api.get('/get-cars')
+            .then(response => {
+                setCars(response.data.data);
+            });
+    }, []);
+
     return (
-        <SimpleGrid columns={4} spacing={4}>
-            {Cars.map((car) => (
-                <Car key={car.id} image={car.image} name={car.name} brand={car.brand} model={car.model} price={car.price} />
-            ))}
-        </SimpleGrid>
+        <Flex marginTop='16px' flexDirection='column'>
+            <Title title="Ultimos Carros cadastrados" />
+            <SimpleGrid columns={5} spacing={4}>
+                {carList.map((car) => (
+                    <Car key={car.id} image={car.image} name={car.name} brand={car.brand} model={car.model} price={car.price} />
+                ))}
+            </SimpleGrid>
+        </Flex>
     )
 }
 

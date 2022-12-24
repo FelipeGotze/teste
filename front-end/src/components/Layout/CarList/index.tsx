@@ -1,88 +1,59 @@
-import { SimpleGrid } from "@chakra-ui/react";
+import { Search2Icon } from "@chakra-ui/icons";
+import { Box, Flex, Input, InputGroup, InputRightElement, SimpleGrid } from "@chakra-ui/react";
+import { useEffect, useState } from "react";
+import { api } from "../../../services/api";
 import Car from "../../Common/Car";
 
-const Cars = [
-    {
-        id: 1,
-        image: "",
-        name: "car 1",
-        model: "hatch",
-        brand: "Nissan",
-        price: "75.000,00"
-    },
-    {
-        id: 2,
-        image: "",
-        name: "car 1",
-        model: "hatch",
-        brand: "Nissan",
-        price: "75.000,00"
-    },
-    {
-        id: 3,
-        image: "",
-        name: "car 1",
-        model: "hatch",
-        brand: "Nissan",
-        price: "75.000,00"
-    },
-    {
-        id: 4,
-        image: "",
-        name: "car 1",
-        model: "hatch",
-        brand: "Nissan",
-        price: "75.000,00"
-    },
-    {
-        id: 5,
-        image: "",
-        name: "car 1",
-        model: "hatch",
-        brand: "Nissan",
-        price: "75.000,00"
-    },
-    {
-        id: 6,
-        image: "",
-        name: "car 1",
-        model: "hatch",
-        brand: "Nissan",
-        price: "75.000,00"
-    },
-    {
-        id: 7,
-        image: "",
-        name: "car 1",
-        model: "hatch",
-        brand: "Nissan",
-        price: "75.000,00"
-    },
-    {
-        id: 8,
-        image: "",
-        name: "car 1",
-        model: "hatch",
-        brand: "Nissan",
-        price: "75.000,00"
-    },
-    {
-        id: 9,
-        image: "",
-        name: "car 1",
-        model: "hatch",
-        brand: "Nissan",
-        price: "75.000,00"
-    },
-];
+interface CarProps {
+    id: number,
+    name: string,
+    model: string,
+    brand: string,
+    price: number,
+    image: string,
+}
 
 const CarList = () => {
+    const query = useState<string>("")
+    const [cars, setCars] = useState<CarProps[]>([]);
+    const [carList, setCarsList] = useState<CarProps[]>([]);
+
+    useEffect(() => {
+        api.get('/get-cars')
+            .then(response => {
+                setCarsList(response.data.data);
+                setCars(response.data.data);
+            });
+    }, []);
+
+    function filterCars(e: any) {
+        const updatedCars = cars.filter(car => {
+            return car.name.toUpperCase().includes(e.target.value.toUpperCase()) || car.model.toUpperCase().includes(e.target.value.toUpperCase())
+        });
+        setCarsList(updatedCars);
+    }
+
     return (
-        <SimpleGrid columns={4} spacing={4}>
-            {Cars.map((car) => (
-                <Car key={car.id} image={car.image} name={car.name} brand={car.brand} model={car.model} price={car.price} />
-            ))}
-        </SimpleGrid>
+        <Flex direction="column">
+            <Box w='100%'>
+                <InputGroup w="800px" margin="auto">
+                    <InputRightElement
+                        pointerEvents='none'
+                        children={<Search2Icon color='gray.300' />}
+                    />
+                    <Input
+                        type='tel'
+                        placeholder='Busque por marca ou modelo'
+                        onChange={e => filterCars(e)}
+                    />
+                </InputGroup>
+            </Box>
+            <SimpleGrid columns={4} spacing={4}>
+                {carList.map(car => (
+                    <Car key={car.id} image={car.image} name={car.name} brand={car.brand} model={car.model} price={car.price} />
+                ))}
+            </SimpleGrid>
+        </Flex>
     )
 }
 
