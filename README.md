@@ -1,4 +1,4 @@
-# teste-verzel
+# Catálogo de veículos
 
 Após clonar o repósitório e executar os comandos de instalação, executar o comando "migrate" no laravel, o banco de dados utilizado foi o MySQL.
 
